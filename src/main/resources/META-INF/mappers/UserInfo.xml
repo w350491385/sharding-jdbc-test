@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bn.repository.UserInfoRepository">
+    
+    <resultMap id="baseResultMap" type="com.bn.entity.UserInfo">
+        <result column="id" property="id" jdbcType="BIGINT" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+    </resultMap>
+    
+    <insert id="addUserInfo">
+        INSERT INTO user_info (id,
+          user_id, address, mobile
+        )
+        VALUES (
+        #{id,jdbcType=BIGINT},
+        #{userId,jdbcType=INTEGER},
+        #{address,jdbcType=VARCHAR},
+        #{mobile,jdbcType=VARCHAR}
+        )
+    </insert>
+   
+    <select id="list" resultMap="baseResultMap">
+        SELECT u.* FROM user_info u order by u.id
+    </select>
+
+    <delete id="deleteAll">
+        delete from user_info;
+    </delete>
+
+</mapper>
